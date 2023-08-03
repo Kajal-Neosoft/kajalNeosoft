@@ -11,5 +11,5 @@ import java.util.List;
 @Builder
 public class Data {
 
-    public List<Warehouse> warehouse;
+    public String warehouse;
 }

@@ -1,20 +1,20 @@
 package com.neosoft.stockone.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @ToString
+@Getter
+@Setter
 public class StockResponse {
 
     @NotNull
     private Meta meta;
 
-    private Data data;
+    private List<Data> data;
 }

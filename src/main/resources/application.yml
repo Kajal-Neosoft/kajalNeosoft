@@ -18,7 +18,12 @@ spring:
 
 
 authorization:
-  token: Z9DvcPcM4IjKZb8Afgst05xYGJuizz
+  token: VwFXWxwNNtb0Y7Sj8uSSTvpZP2ByKJ
+
+stockone:
+  warehouse:
+    service:
+      url: https://nxt.stockone.com/api/v1
 
 
 server:
