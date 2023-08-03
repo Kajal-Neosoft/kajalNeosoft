@@ -1,0 +1,25 @@
+
+spring:
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/stockwarehouse
+    username: "postgres"
+    password: "104104"
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: 'true'
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+
+
+authorization:
+  token: Z9DvcPcM4IjKZb8Afgst05xYGJuizz
+
+
+server:
+  port: '8083'
