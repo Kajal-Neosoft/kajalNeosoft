@@ -1,0 +1,58 @@
+replicaCount: 1
+
+image:
+  repository: 096987977627.dkr.ecr.eu-west-1.amazonaws.com/api/cas-service
+  tag: latest
+  pullPolicy: Always
+
+nameOverride: "cas-service"
+fullnameOverride: "cas-service"
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  paths:
+    - /api/v1/cas
+
+aws:
+  role: Neo-Prod-Api-CloudWatch-Role
+
+env:
+  db_host: pme5v4x54sod5w.cv1ukx7wjryy.eu-west-1.rds.amazonaws.com
+  db_name: neo_service_cas
+  db_password: null
+  db_username: null
+  activemq:
+    broker_url: vm://localhost?broker.persistent=false,useShutdownHook=false
+    user: admin
+    password: admin
+  container:
+    ingress:
+      neo:
+        service:
+          trigger: http://trigger-service.trigger-service.svc:8080
+
+  cas:
+    configuration:
+      scheduler: 10000
+    beneficiary:
+      service:
+        url: http://localhost:3000/api/v1/beneficiaries
+      mobile-internal:
+        url: /mobile-internal
+    benefit:
+      iban-directories:
+        url: https://cas.test-benefitpay.bh/benefit-cas/ext/v1/cas/iban-directories/inquire
+    auth:
+      client-id: null
+      secretKey: null
+
+  spring:
+    profiles:
+        active: prod

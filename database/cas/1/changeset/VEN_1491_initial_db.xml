@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="cas_1_1" author="Tejas Sadye">
+        <comment>Initial release for all the CAS tables</comment>
+        <sqlFile path="database/cas/1/rollout/VEN_1491_initial_db.sql"/>
+        <rollback>
+            <sqlFile path="database/cas/1/rollback/VEN_1491_initial_db.sql"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

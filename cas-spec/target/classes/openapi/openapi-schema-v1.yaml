@@ -1,0 +1,115 @@
+openapi: 3.0.1
+info:
+  title: Cas Service
+  description: Cas Service API
+  version: "1.0"
+servers:
+  - url: https://localhost/v1
+  - url: http://localhost/v1
+tags:
+  - name: Cas API's
+    description: ''
+
+paths:
+  /cas/configurations:
+    get:
+      summary: To fetch CAS related configuration
+      tags:
+        - Cas API's
+      operationId: GetConfigurationAPI
+      parameters:
+        - name: segment
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: filterByParameter
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: unitName
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CasResponse'
+
+
+components:
+  schemas:
+    Meta:
+      title: Meta
+      required:
+        - code
+        - message
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      example:
+        code: DORM-0001
+        message: Request Processed Successfully
+
+    CasResponse:
+      title: CasResponse
+      required:
+        - meta
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        data:
+          $ref: '#/components/schemas/CasConfigurationData'
+
+    CasConfigurationData:
+      title: Cas Configuration Data
+      required:
+        - configurations
+      type: object
+      properties:
+        configurations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Configuration'
+          description: ''
+
+    Configuration:
+      title: Configuration
+      required:
+        - param
+        - type
+        - value
+        - description
+      type: object
+      properties:
+        param:
+          type: string
+        type:
+          type: string
+        value:
+          type: string
+        description:
+          type: string
+
+
+
+
+
+
+
+
+security:
+  - {}

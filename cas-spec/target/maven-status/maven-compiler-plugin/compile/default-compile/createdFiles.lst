@@ -1,0 +1,16 @@
+com\neo\v1\cas\api\NeoServiceV1Api.class
+com\neo\v1\cas\model\CasConfigurationData$CasConfigurationDataBuilder.class
+com\neo\v1\cas\model\Configuration.class
+com\neo\v1\cas\api\IlaBaseClass.class
+com\neo\v1\cas\model\CasResponse$Builder.class
+com\neo\v1\cas\model\Configuration$ConfigurationBuilder.class
+com\neo\v1\cas\model\Meta$MetaBuilder.class
+com\neo\v1\cas\model\CasResponse$CasResponseBuilder.class
+com\neo\v1\cas\model\CasConfigurationData$Builder.class
+com\neo\v1\cas\model\Meta$Builder.class
+com\neo\v1\cas\model\Configuration$Builder.class
+com\neo\v1\cas\model\IlaBaseClass.class
+com\neo\v1\cas\model\CasResponse.class
+com\neo\v1\cas\model\Meta.class
+com\neo\v1\cas\model\CasConfigurationData.class
+com\neo\v1\cas\type\IlaBaseClass.class

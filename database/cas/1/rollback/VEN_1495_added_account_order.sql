@@ -1,0 +1,16 @@
+--DROP TABLE account_order;
+--DROP SEQUENCE seq_account_order;
+--
+--DROP TABLE language;
+--
+--DELETE FROM unit_feature_configuration WHERE id = 1;
+--DELETE FROM unit_feature_configuration WHERE id = 2;
+--DELETE FROM unit_feature_configuration WHERE id = 3;
+--DELETE FROM unit_feature_configuration WHERE id = 4;
+--
+--DELETE FROM feature_configuration WHERE id = 1;
+--
+--DELETE FROM unit WHERE id = 1;
+--DELETE FROM unit WHERE id = 2;
+--DELETE FROM unit WHERE id = 3;
+--DELETE FROM unit WHERE id = 4;
