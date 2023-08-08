@@ -1,8 +1,14 @@
-<div class="container" style="width:600px">
-  <div style="margin: 20px">
-    <h3>Upload Files</h3>
-    <h4>{{ title }}</h4>
-  </div>
 
-  <app-upload-files></app-upload-files>
-</div>
+
+<section class="section2">
+  <a [routerLink]="['employeeList']" [routerLinkActive]="['activeLink']">employee-list</a>   
+  <a [routerLink]="['uploadFiles']" [routerLinkActive]="['activeLink']">upload file</a>  
+   
+</section>
+<br><br><br>
+
+<section [ngClass]="['routesesction']">
+  <router-outlet></router-outlet>
+</section>
+ 
+  

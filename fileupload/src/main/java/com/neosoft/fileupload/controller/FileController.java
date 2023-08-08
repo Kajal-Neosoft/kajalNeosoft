@@ -1,11 +1,17 @@
 package com.neosoft.fileupload.controller;
 
+import com.neosoft.fileupload.model.Employee;
 import com.neosoft.fileupload.model.FileDb;
+import com.neosoft.fileupload.repository.EmployeeRepo;
 import com.neosoft.fileupload.response.ResponseFile;
 import com.neosoft.fileupload.response.ResponseMessage;
+import com.neosoft.fileupload.service.EmployeeService;
 import com.neosoft.fileupload.service.FileStorageService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +31,7 @@ import java.util.stream.Collectors;
 public class FileController {
 
     private final FileStorageService fileStorageService;
+    private  final EmployeeService employeeService;
 
     @PostMapping("/upload")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file)
@@ -71,6 +78,17 @@ public class FileController {
 
         return ResponseEntity.ok()
                 .body(fileDB.getData());
+    }
+
+    @GetMapping("/getAllEmployee")
+    public Page<Employee> getAllEmployee(
+            @RequestParam(value = "pageNo", required = false) int pageNo,
+            @RequestParam(value = "pageSize",  required = false) int pageSize
+    )
+    {
+
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        return employeeService.getAllEmployee(pageable);
     }
 
 

@@ -1,3 +1,5 @@
+
+
 <div *ngIf="currentFile" class="progress">
     <div
       class="progress-bar progress-bar-info progress-bar-striped"
@@ -12,7 +14,7 @@
   </div>
   
   <label class="btn btn-default">
-    <input type="file" (change)="selectFile($event)" />
+    <input type="file" (change)="selectFile($event)" (change)="ReadExcel($event)" />
   </label>
   
   <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">
@@ -32,10 +34,28 @@
         <button (click)="downloadFile(file)">download</button>
       </li>
     </ul>
-
+  </div>
+  <div style="width: 50%; margin: 20%;">
+    <h3 style="text-align: center;">Excel data in html table</h3>
+    <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">RollNo</th>
+        <th scope="col">firstName</th>
+        <th scope="col">sub</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of ExcelData">
+        <th scope="row">{{data.RollNo}}</th>
+        <td>{{data.firstName}}</td>
+        <td>{{data.sub}}</td>
+      </tr>
+    </tbody>
+    </table>
+    
   </div>
 
-  <!-- <div *ngFor="let file of fileInfos">
-    <button (click)="downloadFile(file)">Download File {{ file.id }}</button>
-  </div> -->
+ 
+
   
