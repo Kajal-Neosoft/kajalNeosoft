@@ -19,7 +19,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
 
     private final AuthenticationManager authenticationManager;
-    public AuthentcationResponse register(RegisterRequest request) {
+    public String register(RegisterRequest request) {
         var user= User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
@@ -27,9 +27,13 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-        repository.save(user);
-        var jwtToken=jwtService.generateToken(user);
-        return AuthentcationResponse.builder().token(jwtToken).build();
+       User user1 = repository.save(user);
+
+        if(user1 != null)
+        {
+            return "successfully registered";
+        }
+        return "registration failed";
     }
 
     public AuthentcationResponse authenticate(AuthenticationRequest request) {

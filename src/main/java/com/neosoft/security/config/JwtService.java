@@ -1,12 +1,15 @@
 package com.neosoft.security.config;
 
+import com.neosoft.security.Exception.JwtTokentimeExpiration;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.security.Key;
 import java.util.Date;
@@ -20,6 +23,8 @@ public class JwtService {
     // 77397A24432646294A404E635266556A586E327235753878214125442A472D4B
     // go to the all key genereator website and generate custom key generator minimum required bit is 256bit
     public static final String SECRET_KEY="5368566D597133743677397A244326452948404D635166546A576E5A72347537";
+
+
     public String extractUsername(String token)
     {
         return extractClaims(token,Claims::getSubject); // in subject will exctract email as a userName our email wil be extract
@@ -41,7 +46,7 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 5))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -54,7 +59,11 @@ public class JwtService {
     }
 
     private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+         return extractExpiration(token).before(new Date());
+//        {
+//            throw new JwtTokentimeExpiration("Jwt Token time Expired");
+//        }
+//        return false;
     }
 
     private Date extractExpiration(String token) {
@@ -69,11 +78,18 @@ public class JwtService {
     }
     private Claims extractAllClaims(String token)
     {
+        try{
         return Jwts.parserBuilder()
                 .setSigningKey(getSignInKey()) // to generate token we want key
                 .build()
                 .parseClaimsJws(token) //to encode claims or convert the claims
                 .getBody();
+        }
+        catch (JwtTokentimeExpiration ex)
+        {
+            throw new JwtTokentimeExpiration("Jwt token is expired");
+        }
+
     }
 
     private Key getSignInKey() {
